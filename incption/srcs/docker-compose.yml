@@ -1,0 +1,21 @@
+version: "3"
+services:
+  nginx:
+    build: requirements/nginx
+    env_file: .env
+    container_name: website 
+    ports:
+      - "80:80"
+    restart: always
+  # WordPress:
+  #   build: requirements/WordPress
+  #   env_file: .env
+  #   container_name: intra
+  #   ports:
+  #     - "80:80"
+  #   restart: always
+  # mariadb:
+  #   container_name: badgeuse
+  #   build: requirements/mariadb
+  #   env_file: .env
+  #   restart: always
