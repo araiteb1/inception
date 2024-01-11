@@ -7,15 +7,27 @@ services:
   #   ports:
   #     - "80:80"
   #   restart: always
-  # WordPress:
-  #   build: requirements/WordPress
-  #   env_file: .env
-  #   container_name: intra
-  #   ports:
-  #     - "80:80"
-  #   restart: always
   mariadb:
     container_name: mdb
     build: requirements/mariadb
     env_file: .env
     restart: always
+    volumes:
+      - mariadb_data:/var/lib/mysql
+
+  WordPress:
+    depends_on:
+      - mariadb
+    build: requirements/wordpress
+    ports:
+      - '80:80'
+    volume: ['./:/var/www/html']
+    environment:
+      WORDPRESS_DB_HOST: mariadb:3306
+    networks:
+      - wpsite
+networks:
+  wpsite:
+volumes:
+  mariadb_data:   
+     
