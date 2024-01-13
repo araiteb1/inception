@@ -15,13 +15,14 @@ services:
     volumes:
       - mariadb_data:/var/lib/mysql
 
-  WordPress:
+  wordpress:
     depends_on:
       - mariadb
     build: requirements/wordpress
     ports:
       - '80:80'
-    volume: ['./:/var/www/html']
+    volumes: 
+      - ./:/var/www/html
     environment:
       WORDPRESS_DB_HOST: mariadb:3306
     networks:
