@@ -1,11 +1,13 @@
-FROM debian
+FROM debian:buster
 RUN  apt-get update
 RUN apt-get install -y php7.3\
 						php-fpm\
 						php-mysql\
-						mariadb-client\
-                        wget
+                        wget\
+						curl
 COPY ./tools  /var/
 EXPOSE 9000
-CMD ["bash"]
+RUN chmod +x /var/script.sh
+ENTRYPOINT [ "/var/script.sh" ]
+# CMD [""]
 
