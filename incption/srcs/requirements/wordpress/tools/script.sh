@@ -1,10 +1,17 @@
 #!/bin/sh
 
-echo "hey !!" 
-mkdir /var/www
-mkdir /var/www/html
-CREATE DATABASE wordpress DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-CREATE USER 'yumee'@'%' IDENTIFIED WITH mysql_native_password BY 'yume';
-GRANT ALL ON wordpress.* TO 'wordpressuser'@'%';
-apt update;
-apt install -y php-curl php-gd php-mbstring php-xml php-xmlrpc php-soap php-intl php-zip;
+
+mkdir -p /var/www/html;
+cd /var/www/html;
+curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar;
+chmod +x wp-cli.phar;
+mv wp-cli.phar /usr/local/bin/wp;
+cd /var/www/html;
+wp core download --allow-root;
+# mv /var/www/wp-config.php /var/www/html;
+# echo "Wordpress: creating config file";
+# wp configcreate --allow-root --dbame=yume --dbpass=yumee --locale=yume;
+# echo "Wordpress: creating user";
+# wp core install --allow-root --url=`localhost` --title="inception" --admin_user="ahlam" --admin_email="ahlam@ahlam.com";
+# wp user create --allow-root "ahlam" "ahlam@ahlam.com";
+# echo "Wordpress: set up!";
