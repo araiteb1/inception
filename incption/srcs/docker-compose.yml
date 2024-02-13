@@ -8,27 +8,39 @@ services:
   #     - "80:80"
   #   restart: always
   mariadb:
-    container_name: mdb
+    container_name: mariadb
     build: requirements/mariadb
     env_file: .env
     restart: always
-    volumes:
-      - mariadb_data:/var/lib/mysql
+    # volumes:
+    #   - mariadb:/var/lib/mysql
 
-  wordpress:
-    depends_on:
-      - mariadb
-    build: requirements/wordpress
-    ports:
-      - '80:80'
-    volumes: 
-      - ./:/var/www/html
-    environment:
-      WORDPRESS_DB_HOST: mariadb:3306
-    networks:
-      - wpsite
+  # wordpress:
+  #   depends_on:
+  #     - mariadb
+  #   build: requirements/wordpress
+  #   ports:
+  #     - '80:80'
+  #   # volumes: 
+  #   #   - ./:/var/www/html
+  #   environment:
+  #     WORDPRESS_DB_HOST: mariadb:3306
+  # #   # networks:
+  #   #   - wpsite
 networks:
-  wpsite:
-volumes:
-  mariadb_data:   
+  inseption_word:
+# volumes:
+#   db_volume:
+#     driver : local
+#     driver_opts:
+#       type : "none"
+#       o    : "bind"
+#       device: "/home/araiteb/data/db"
+#   wp_volume:
+#   driver : local
+#   driver_opts:
+#     type : "none"
+#     o    : "bind"
+#     device: "/home/araiteb/data/wp"
+
      

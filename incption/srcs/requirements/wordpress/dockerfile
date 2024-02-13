@@ -5,9 +5,16 @@ RUN apt-get install -y php7.3\
 						php-mysql\
                         wget\
 						curl
-COPY ./tools  /var/
+COPY ./tools  /
 EXPOSE 9000
-RUN chmod +x /var/script.sh
-ENTRYPOINT [ "/var/script.sh" ]
-# CMD [""]
+
+RUN wget https://wordpress.org/wordpress-5.7.2.tar.gz
+RUN tar xvzf wordpress-5.7.2.tar.gz
+RUN mkdir /var/www
+RUN mv wordpress /var/www/wordpress
+RUN rm wordpress-5.7.2.tar.gz
+RUN  mv ./wp-config.php /var/www/wordpress/wp-config.php
+
+# ENTRYPOINT [ "/var/www/script.sh" ]
+CMD bash script.sh
 
