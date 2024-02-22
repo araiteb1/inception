@@ -1,9 +1,0 @@
-#!bin/sh
-
-
-db_exist=$(echo "SHOW DATABASES" | mysql | grep $DATA_NAME | wc -l)
-CREATE DATABASE IF NOT EXISTS $DATA_NAME;
-CREATE USER IF NOT EXISTS '$DATA_USER'@'%' IDENTIFIED BY '$DB_PASSWORD';
-echo "CREATE DATABASE IF NOT EXISTS $DATA_NAME;" | mysql -u root
-echo "GRANT ALL ON *.* TO '$DATA_USER'@'%' IDENTIFIED BY '$DB_PASSWORD' WITH GRANT OPTION;" | mysql -u root
-echo "FLUSH PRIVILEGES" | mysql -u root
